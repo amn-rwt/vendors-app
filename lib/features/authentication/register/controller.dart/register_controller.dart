@@ -19,6 +19,7 @@ class RegisterController extends GetxController {
     final userCredentials =
         FirebaseAuthServices.registerVendor(email, password);
     final Vendor vendor = Vendor(
+      userID: userCredentials,
       name: name,
       resturantName: resturantName,
       pricePerTiffin: pricePerTiffin,
