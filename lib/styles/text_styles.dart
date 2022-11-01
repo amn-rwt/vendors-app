@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vendors_app/constants/color_constants.dart';
 
-TextStyle largeHeadingTextStyle([Color? color = Colors.black54]) {
+TextStyle largeHeadingTextStyle([Color? color = Colors.black87]) {
   return TextStyle(
     color: color,
     fontSize: 18,
@@ -8,7 +9,7 @@ TextStyle largeHeadingTextStyle([Color? color = Colors.black54]) {
   );
 }
 
-TextStyle mediumHeadingTextStyle([Color? color = Colors.black54]) {
+TextStyle mediumHeadingTextStyle([Color? color = Colors.black87]) {
   return TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
@@ -16,7 +17,7 @@ TextStyle mediumHeadingTextStyle([Color? color = Colors.black54]) {
   );
 }
 
-TextStyle mediumTextStyle([Color? color = Colors.black54]) {
+TextStyle mediumTextStyle([Color? color = Colors.black87]) {
   return TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,

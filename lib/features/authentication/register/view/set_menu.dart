@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vendors_app/components/custom_appbar.dart';
+import 'package:vendors_app/components/appbar.dart';
 import 'package:vendors_app/components/large_button.dart';
 import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/styles/text_styles.dart';
@@ -58,7 +58,7 @@ class _ExpansionPanelExampleState extends State<ExpansionPanelExample> {
                           ),
                           child: ExpansionTile(
                             maintainState: true,
-                            title: Text(today.day),
+                            title: Text(today.day, style: mediumTextStyle()),
                             initiallyExpanded: (index == 0) ? true : false,
                             children: [
                               GridView.builder(

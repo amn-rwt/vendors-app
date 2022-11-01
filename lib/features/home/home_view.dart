@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vendors_app/components/custom_appbar.dart';
+import 'package:vendors_app/components/appbar.dart';
 import 'package:vendors_app/components/order_details_tile.dart';
 import 'package:vendors_app/components/todays_menu.dart';
 import 'package:vendors_app/constants/color_constants.dart';

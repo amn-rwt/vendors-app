@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vendors_app/constants/color_constants.dart';
-import 'package:vendors_app/features/authentication/register/view/register_view.dart';
-import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
+import 'package:vendors_app/features/authentication/auth_wrapper.dart';
+import 'package:vendors_app/features/authentication/register/view/add_details_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
       ),
-      home: const SafeArea(
-        bottom: false,
-        child: ExpansionPanelExample(),
-      ),
+      home: const SafeArea(bottom: false, child: AuthWrapper()),
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,
     );

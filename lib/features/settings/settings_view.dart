@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:vendors_app/components/custom_appbar.dart';
+import 'package:vendors_app/components/appbar.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
