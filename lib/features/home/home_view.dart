@@ -6,7 +6,8 @@ import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  final String? uid;
+  const HomeView({super.key, this.uid});
 
   @override
   Widget build(BuildContext context) {

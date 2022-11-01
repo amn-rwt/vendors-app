@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/features/settings/settings_view.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
 class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
@@ -46,11 +50,14 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
-                child: const Icon(
-                  Icons.settings,
-                  color: Colors.black87,
-                ),
-              )
+                child: IconButton(
+                  onPressed: () => Get.to(() => const SettingsView()),
+                  // onPressed: () => log('here'),
+                  icon: const Icon(
+                    Icons.settings,
+                    color: Colors.black87,
+                  ),
+                ))
             : const SizedBox(),
       ],
       title: Text(

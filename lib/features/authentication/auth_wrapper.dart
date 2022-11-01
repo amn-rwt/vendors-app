@@ -9,14 +9,9 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoggedIn = true;
-    FirebaseAuth.instance.userChanges().listen((User? user) {
-      if (user == null) {
-        isLoggedIn = false;
-      } else {
-        isLoggedIn = true;
-      }
-    });
-    return (isLoggedIn) ? const LoginView() : const HomeView();
+    return (FirebaseAuth.instance.currentUser == null)
+        ? const LoginView()
+        : const HomeView();
+
   }
 }

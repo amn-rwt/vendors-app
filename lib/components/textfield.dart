@@ -7,11 +7,13 @@ class CustomTextfield extends StatelessWidget {
   final String hintText;
   final bool isObsecure;
   final String? prefixText;
+  final TextInputType? textInputType;
   const CustomTextfield(
       {super.key,
       required this.controller,
       required this.hintText,
       this.prefixText,
+      this.textInputType = TextInputType.text,
       this.isObsecure = false});
 
   @override

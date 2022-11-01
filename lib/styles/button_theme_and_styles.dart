@@ -9,7 +9,7 @@ ButtonStyle activeButtonStyle() {
     alignment: Alignment.center,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     textStyle: const TextStyle(
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       fontSize: 14,
       color: Colors.white,
     ),

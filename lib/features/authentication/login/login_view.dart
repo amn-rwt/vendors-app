@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/components/large_button.dart';
 import 'package:vendors_app/components/textfield.dart';
 import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/features/authentication/login/login_controller.dart';
+import 'package:vendors_app/styles/text_styles.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -23,6 +25,7 @@ class LoginView extends StatelessWidget {
             CustomTextfield(
               controller: controller.email,
               hintText: 'Email',
+              textInputType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 10),
             CustomTextfield(
@@ -33,18 +36,24 @@ class LoginView extends StatelessWidget {
             const SizedBox(height: 30),
             LargeButton(
               label: 'Login',
-              onPressed: () =>
-                  log(controller.loginWithEmailAndPassword().toString()),
+              onPressed: () => controller.loginWithEmailAndPassword(),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Register?',
-              style: TextStyle(
-                fontSize: 12,
-                decoration: TextDecoration.underline,
-                color: Colors.blue,
+            RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                text: 'Not a user?  ',
+                style: mediumTextStyle(),
               ),
-            ),
+              TextSpan(
+                  recognizer: TapGestureRecognizer()..onTap = () => log('here'),
+                  text: 'Login',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                  )),
+            ])),
             const SizedBox(height: 40),
           ],
         ),
