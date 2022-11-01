@@ -5,11 +5,11 @@ class Vendor {
   final String phone;
   final String email;
   final String? upiID;
-  final String userID;
+  // final String userID;
   Vendor(
       {
-        required this.userID,
-        required this.name,
+      // required this.userID,
+      required this.name,
       required this.resturantName,
       required this.pricePerTiffin,
       required this.phone,

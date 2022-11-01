@@ -1,12 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vendors_app/components/compact_button.dart';
-import 'package:vendors_app/components/large_button.dart';
-import 'package:vendors_app/components/textfield.dart';
-import 'package:vendors_app/components/todays_menu.dart';
 import 'package:vendors_app/constants/color_constants.dart';
-import 'package:vendors_app/features/authentication/register/register_view.dart';
+import 'package:vendors_app/features/authentication/register/view/register_view.dart';
+import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,35 +23,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
       ),
-      home: SafeArea(
+      home: const SafeArea(
         bottom: false,
-        child: RegisterView(),
+        child: ExpansionPanelExample(),
       ),
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Container(
-                  height: 400,
-                ),
-                // TodaysMenu(),
-              ],
-            )),
-      ),
     );
   }
 }

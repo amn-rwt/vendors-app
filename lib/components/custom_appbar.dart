@@ -22,16 +22,17 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
       centerTitle: true,
       leading: (leading == true)
           ? Container(
-              margin: const EdgeInsets.all(4),
+              margin: const EdgeInsets.only(top: 4, left: 4),
+              padding: const EdgeInsets.only(left: 8),
               width: 40,
               height: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
               ),
-              child: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+                onPressed: () => Navigator.pop(context),
               ),
             )
           : const SizedBox(),
