@@ -20,42 +20,21 @@ class RegisterView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomTextfield(
-              controller: controller.name,
-              hintText: 'Name',
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              controller: controller.resturantName,
-              hintText: 'Resturant Name',
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
               controller: controller.email,
               hintText: 'Email',
             ),
-            const SizedBox(height: 10),
             CustomTextfield(
               controller: controller.password,
               hintText: 'Password',
               isObsecure: true,
             ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              controller: controller.pricePerTiffin,
-              hintText: 'Price per tiffin',
-              prefixText: ruppeSymbol,
-            ),
             const SizedBox(height: 20),
             LargeButton(
                 label: 'REGISTER',
                 onPressed: () => controller.registerUser(
-                    controller.name.text,
-                    controller.email.text,
-                    controller.resturantName.text,
-                    controller.password.text,
-                    12,
-                    'controller.phone.text',
-                    controller.upiID.text)),
+                      controller.email.text,
+                      controller.password.text,
+                    )),
             const SizedBox(height: 20),
             RichText(
               text: TextSpan(

@@ -7,6 +7,7 @@ import 'package:vendors_app/components/large_button.dart';
 import 'package:vendors_app/components/textfield.dart';
 import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/features/authentication/login/login_controller.dart';
+import 'package:vendors_app/features/authentication/register/view/register_view.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
 class LoginView extends StatelessWidget {
@@ -27,7 +28,6 @@ class LoginView extends StatelessWidget {
               hintText: 'Email',
               textInputType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 10),
             CustomTextfield(
               controller: controller.password,
               hintText: 'Password',
@@ -46,7 +46,8 @@ class LoginView extends StatelessWidget {
                 style: mediumTextStyle(),
               ),
               TextSpan(
-                  recognizer: TapGestureRecognizer()..onTap = () => log('here'),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Get.to(RegisterView()),
                   text: 'Login',
                   style: const TextStyle(
                     fontSize: 14,

@@ -7,6 +7,12 @@ import 'package:vendors_app/features/authentication/login/login_view.dart';
 import 'package:vendors_app/features/home/home_view.dart';
 
 class LoginController extends GetxController {
+  @override
+  void onClose() {
+    dispose();
+    super.onClose();
+  }
+
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 

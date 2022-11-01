@@ -19,15 +19,18 @@ class CustomListTile extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: ListTile(
-        title: Text(label, style: listTileTextStyle()),
-        trailing: (trailing)
-            ? const Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-              )
-            : const SizedBox(),
-        onTap: () => onTap!(),
+      child: Align(
+        alignment: Alignment.center,
+        child: ListTile(
+          title: Text(label, style: listTileTextStyle()),
+          trailing: (trailing)
+              ? const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                )
+              : const SizedBox(),
+          onTap: () => onTap!(),
+        ),
       ),
     );
   }

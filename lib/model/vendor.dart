@@ -1,4 +1,5 @@
 class Vendor {
+  final String uId;
   final String name;
   final String resturantName;
   final int pricePerTiffin;
@@ -7,8 +8,7 @@ class Vendor {
   final String? upiID;
   // final String userID;
   Vendor(
-      {
-      // required this.userID,
+      {required this.uId,
       required this.name,
       required this.resturantName,
       required this.pricePerTiffin,
@@ -17,6 +17,7 @@ class Vendor {
       this.upiID});
   Map<String, dynamic> toMap() {
     return {
+      'uId': uId,
       'name': name,
       'resturantName': resturantName,
       'email': email,

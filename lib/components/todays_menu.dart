@@ -65,7 +65,7 @@ class _TodaysMenuState extends State<TodaysMenu> {
                       children: [
                         Container(
                           height: 50,
-                          width: 50,
+                          width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(3),
                             color: Colors.black,
@@ -77,9 +77,7 @@ class _TodaysMenuState extends State<TodaysMenu> {
             ),
           ),
           const SizedBox(height: 20),
-          Container(
-            
-          ),
+          Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
