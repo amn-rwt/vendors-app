@@ -17,36 +17,35 @@ class AddDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterController());
     return Scaffold(
-      appBar: CustomAppbar(label: 'Add Details'),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-          child: Column(
-            children: [
-              CustomTextfield(controller: controller.name, hintText: 'Name'),
-              CustomTextfield(controller: controller.phone, hintText: 'Phone'),
-              CustomTextfield(
-                  controller: controller.resturantName,
-                  hintText: 'Resturant Name'),
-              CustomTextfield(
-                  controller: controller.pricePerTiffin,
-                  hintText: 'Price per tiffin',
-                  prefixText: ruppeSymbol),
-              CustomTextfield(controller: controller.upiID, hintText: 'UPI Id'),
-              Spacer(),
-              LargeButton(
-                  label: 'Next',
-                  onPressed: () => controller.addDetails(
-                        controller.name.text,
-                        email,
-                        controller.resturantName.text,
-                        int.parse(controller.pricePerTiffin.text),
-                        controller.phone.text,
-                        controller.upiID.text,
-                        uid,
-                      ))
-            ],
-          ),
+      appBar: const CustomAppbar(label: 'Add Details'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+        child: Column(
+          children: [
+            CustomTextfield(controller: controller.name, hintText: 'Name'),
+            CustomTextfield(controller: controller.phone, hintText: 'Phone'),
+            CustomTextfield(
+                controller: controller.resturantName,
+                hintText: 'Resturant Name'),
+            CustomTextfield(
+                controller: controller.pricePerTiffin,
+                hintText: 'Price per tiffin',
+                prefixText: ruppeSymbol),
+            CustomTextfield(controller: controller.upiID, hintText: 'UPI Id'),
+            const Spacer(),
+            LargeButton(
+              label: 'Next',
+              onPressed: () => controller.addDetails(
+                controller.name.text,
+                email,
+                controller.resturantName.text,
+                int.parse(controller.pricePerTiffin.text),
+                controller.phone.text,
+                controller.upiID.text,
+                uid,
+              ),
+            ),
+          ],
         ),
       ),
     );

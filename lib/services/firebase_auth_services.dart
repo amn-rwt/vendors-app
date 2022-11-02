@@ -3,12 +3,6 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthServices {
-  // static Future<String> registerVendor(String email, String password) async {
-  //   final UserCredential userCredential;
-  //   userCredential = await FirebaseAuth.instance
-  //       .createUserWithEmailAndPassword(email: email, password: password);
-  //   return userCredential.user!.uid;
-  // };
   static Future<String> registerVendor(String email, String password) async {
     try {
       UserCredential userCredential =
@@ -22,6 +16,8 @@ class FirebaseAuthServices {
         return 'weak-password';
       } else if (e.code == 'email-already-in-use') {
         return 'email-already-in-use';
+      } else if (e.code == 'invalid-email') {
+        return 'invalid-email';
       }
     } catch (e) {
       return 'somethings-went-wrong';

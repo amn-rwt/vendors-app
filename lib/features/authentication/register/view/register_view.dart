@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vendors_app/components/large_button.dart';
 import 'package:vendors_app/components/textfield.dart';
-import 'package:vendors_app/constants/value_constants.dart';
+import 'package:vendors_app/features/authentication/login/login_view.dart';
 import 'package:vendors_app/features/authentication/register/controller.dart/register_controller.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
@@ -28,6 +30,18 @@ class RegisterView extends StatelessWidget {
               hintText: 'Password',
               isObsecure: true,
             ),
+            const SizedBox(height: 5),
+            Obx(
+              () => (controller.auth_error_message.isNotEmpty)
+                  ? Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        controller.auth_error_message.value,
+                        style: smallTextStyle(Colors.red),
+                      ),
+                    )
+                  : const SizedBox(),
+            ),
             const SizedBox(height: 20),
             LargeButton(
                 label: 'REGISTER',
@@ -43,9 +57,11 @@ class RegisterView extends StatelessWidget {
                     text: 'Already a User?  ',
                     style: smallTextStyle(),
                   ),
-                  const TextSpan(
+                  TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Get.to(const LoginView()),
                     text: 'Login',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.blue,
                       fontSize: 12,
                       decoration: TextDecoration.underline,

@@ -20,14 +20,15 @@ class Day {
   }
 }
 
-class ExpansionPanelExample extends StatefulWidget {
-  const ExpansionPanelExample({super.key});
+class SetMenuView extends StatefulWidget {
+  final String uid;
+  const SetMenuView({super.key, required this.uid});
 
   @override
-  State<ExpansionPanelExample> createState() => _ExpansionPanelExampleState();
+  State<SetMenuView> createState() => _SetMenuViewState();
 }
 
-class _ExpansionPanelExampleState extends State<ExpansionPanelExample> {
+class _SetMenuViewState extends State<SetMenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +125,9 @@ class _ExpansionPanelExampleState extends State<ExpansionPanelExample> {
                       itemCount: 6, // * No of expansion tiles
                     ),
                     const SizedBox(height: 20),
-                    LargeButton(label: 'Next', onPressed: () {})
+                    LargeButton(label: 'Next', onPressed: () {
+                      //* add menu data
+                    })
                   ],
                 ),
               ),

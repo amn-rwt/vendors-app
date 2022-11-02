@@ -40,21 +40,25 @@ class LoginView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                text: 'Not a user?  ',
-                style: mediumTextStyle(),
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Don\'t have a account?  ',
+                    style: smallTextStyle(),
+                  ),
+                  TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Get.to(RegisterView()),
+                    text: 'Register',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontSize: 12,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
               ),
-              TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Get.to(RegisterView()),
-                  text: 'Login',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    decoration: TextDecoration.underline,
-                    color: Colors.blue,
-                  )),
-            ])),
+            ),
             const SizedBox(height: 40),
           ],
         ),

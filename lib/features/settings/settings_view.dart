@@ -8,6 +8,7 @@ import 'package:vendors_app/features/settings/settings_controller.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
 import '../../components/function_list_tile.dart';
+import '../order_settings/order_settings_view.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -32,6 +33,12 @@ class _SettingsViewState extends State<SettingsView> {
           children: [
             const CustomListTile(
               label: 'About',
+            ),
+            CustomListTile(
+              label: 'Order Settings',
+              onTap: () => Get.to(
+                () => const OrderSettingsView(),
+              ),
             ),
             CustomListTile(
               label: 'Logout',
