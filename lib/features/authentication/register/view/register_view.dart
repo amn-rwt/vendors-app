@@ -12,15 +12,25 @@ class RegisterView extends StatelessWidget {
   RegisterView({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Obx(
+              () => (controller.authErrorMessage.isNotEmpty)
+                  ? Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        controller.authErrorMessage.value,
+                        style: smallTextStyle(Colors.red),
+                      ),
+                    )
+                  : const SizedBox(),
+            ),
             CustomTextfield(
               controller: controller.email,
               hintText: 'Email',
@@ -30,25 +40,23 @@ class RegisterView extends StatelessWidget {
               hintText: 'Password',
               isObsecure: true,
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 25),
             Obx(
-              () => (controller.auth_error_message.isNotEmpty)
-                  ? Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        controller.auth_error_message.value,
-                        style: smallTextStyle(Colors.red),
-                      ),
-                    )
-                  : const SizedBox(),
-            ),
-            const SizedBox(height: 20),
-            LargeButton(
+              () => LargeButton(
                 label: 'REGISTER',
-                onPressed: () => controller.registerUser(
-                      controller.email.text,
-                      controller.password.text,
-                    )),
+                isLoading: controller.loader.value,
+                onPressed: () => {
+                  controller.loader.value = !controller.loader.value,
+                  controller
+                      .registerUser(
+                        controller.email.text,
+                        controller.password.text,
+                      )
+                      .then((value) =>
+                          controller.loader.value = !controller.loader.value),
+                },
+                ),
+            ),
             const SizedBox(height: 20),
             RichText(
               text: TextSpan(

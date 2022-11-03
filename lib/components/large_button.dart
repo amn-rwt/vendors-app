@@ -1,11 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/styles/button_theme_and_styles.dart';
 
 class LargeButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String label;
-  const LargeButton({super.key, required this.label, required this.onPressed});
+  final bool isLoading;
+  const LargeButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,11 @@ class LargeButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: activeButtonStyle(),
-        child: Text(label),
+        child: (isLoading)
+            ? const CupertinoActivityIndicator(
+                color: Colors.white,
+              )
+            : Text(label),
       ),
     );
   }

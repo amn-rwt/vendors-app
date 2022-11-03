@@ -27,6 +27,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: scaffoldBackgroundColor,
       ),
       home: SafeArea(bottom: false, child: RegisterView()),
+      // home: SafeArea(
+      //     bottom: false,
+      //     child: SetMenuView(
+      //       uid: '',
+      //     )),
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,
     );

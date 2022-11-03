@@ -1,28 +1,54 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:vendors_app/components/appbar.dart';
+import '../controller.dart/add_food_items_controller.dart';
 
 class AddFoodItemsView extends StatelessWidget {
-  const AddFoodItemsView({super.key});
+  AddFoodItemsView({super.key});
 
+  final controller = Get.put(AddFoodItemsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(label: 'Add Items'),
-      body: GridView.builder(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-          itemBuilder: (context, index) => Column(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    color: Colors.black,
+        appBar: const CustomAppbar(label: 'Add Items'),
+        body: Obx(
+          () => (controller.isLoading.value)
+              ? const Center(child: CupertinoActivityIndicator())
+              : GridView.builder(
+                  itemCount: controller.foodItems.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 6,
                   ),
-                  Text('here')
-                ],
-              )),
-    );
+                  itemBuilder: (context, index) {
+                    final String name = controller.foodItems[index].name;
+                    final String imageUrl =
+                        controller.foodItems[index].imageUrl;
+
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {}, // add Item to specific day doc.
+                          // onTap: () => controller., //add items to selected items list. and model for specific day.
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Image.network(imageUrl),
+                          ),
+                        ),
+                        Text(name),
+                      ],
+                    );
+                  },
+                ),
+        ));
   }
 }

@@ -6,11 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/features/authentication/register/view/add_details.dart';
 import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
+import 'package:vendors_app/model/menu.dart';
 import 'package:vendors_app/model/vendor.dart';
 import 'package:vendors_app/services/cloud_firestore_services.dart';
 import 'package:vendors_app/services/firebase_auth_services.dart';
 
 class RegisterController extends GetxController {
+  RxBool loader = false.obs;
+
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController resturantName = TextEditingController();
@@ -19,21 +22,21 @@ class RegisterController extends GetxController {
   TextEditingController upiID = TextEditingController();
   TextEditingController password = TextEditingController();
 
-  RxString auth_error_message = ''.obs;
+  RxString authErrorMessage = ''.obs;
 
   Future<void> registerUser(String email, String password) async {
     final authResult =
         await FirebaseAuthServices.registerVendor(email, password);
     if (authResult.contains('email-already-in-use')) {
-      auth_error_message.value = 'email-invalid';
+      authErrorMessage.value = 'email-already-in-use';
     } else if (authResult.contains('weak-password')) {
-      auth_error_message.value = 'weak-password';
+      authErrorMessage.value = 'weak-password';
     } else if (authResult.contains('invalid-email')) {
-      auth_error_message.value = 'invalid-email';
+      authErrorMessage.value = 'invalid-email';
     } else if (authResult.contains('something-went-wrong')) {
-      auth_error_message.value = 'something-went-wrong';
+      authErrorMessage.value = 'something-went-wrong';
     } else {
-      Get.to(AddDetails(uid: authResult, email: email));
+      Get.to(() => AddDetails(uid: authResult, email: email));
     }
   }
 
@@ -49,11 +52,14 @@ class RegisterController extends GetxController {
       upiID: upiID,
     );
     CloudFirestoreServices.addUser(vendor);
-    Get.to(SetMenuView(uid: uId));
+    Get.to(() => SetMenuView(uid: uId));
   }
 
-  // final CollectionReference firebaseFirestore =
-  //     FirebaseFirestore.instance.collection('vendors').doc(uId).collection('foodItems');
-
-  // final foodItem = FoodItem(imageUrl: imageUrl, name: name)
+  Future getFoodItemsList() async {
+    final CollectionReference firebaseFirestore =
+        FirebaseFirestore.instance.collection('foodItems');
+    var foodItems = firebaseFirestore
+        .get()
+        .then((value) => log(value.docs.length.toString()));
+  }
 }

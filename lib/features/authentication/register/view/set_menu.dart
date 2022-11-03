@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vendors_app/components/appbar.dart';
 import 'package:vendors_app/components/large_button.dart';
 import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/constants/value_constants.dart';
+import 'package:vendors_app/features/authentication/register/view/add_food_items.dart';
 import 'package:vendors_app/styles/text_styles.dart';
-
-Day today = Day(items: ['One', 'Two', 'Three', 'Four'], day: 'Today');
-List<Map<String, dynamic>> items = List.generate(4, (index) => today.toMap());
-
-class Day {
-  final List<String> items;
-  final String day;
-  Day({required this.items, required this.day});
-
-  Map<String, dynamic> toMap() {
-    return {
-      'items': items,
-      'day': day,
-    };
-  }
-}
 
 class SetMenuView extends StatefulWidget {
   final String uid;
@@ -59,11 +46,12 @@ class _SetMenuViewState extends State<SetMenuView> {
                           ),
                           child: ExpansionTile(
                             maintainState: true,
-                            title: Text(today.day, style: mediumTextStyle()),
+                            title: Text(daysOfWeek[index],
+                                style: mediumTextStyle()),
                             initiallyExpanded: (index == 0) ? true : false,
                             children: [
                               GridView.builder(
-                                itemCount: today.items.length + 1,
+                                itemCount: 1,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 gridDelegate:
@@ -72,17 +60,21 @@ class _SetMenuViewState extends State<SetMenuView> {
                                   // crossAxisSpacing: 4,
                                 ),
                                 itemBuilder: (context, index) =>
-                                    (index == today.items.length)
+                                    (index == 1 - 1)
                                         ? Column(
                                             children: [
-                                              Container(
-                                                height: 50,
-                                                width: 50,
-                                                color: primaryColor,
-                                                child: const Icon(Icons.add,
-                                                    color: Colors.white),
+                                              GestureDetector(
+                                                onTap: () => Get.to(
+                                                    () => AddFoodItemsView()),
+                                                child: Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  color: primaryColor,
+                                                  child: const Icon(Icons.add,
+                                                      color: Colors.white),
+                                                ),
                                               ),
-                                              (today.items.isEmpty)
+                                              (true)
                                                   ? Text(
                                                       'Add items',
                                                       style: smallTextStyle(
@@ -102,7 +94,7 @@ class _SetMenuViewState extends State<SetMenuView> {
                                                     milliseconds: 400),
                                                 waitDuration: const Duration(
                                                     milliseconds: 100),
-                                                message: today.items[index],
+                                                message: 'tooltip item name',
                                                 child: Container(
                                                   height: 50,
                                                   width: 50,
@@ -110,7 +102,7 @@ class _SetMenuViewState extends State<SetMenuView> {
                                                 ),
                                               ),
                                               Text(
-                                                today.items[index],
+                                                'name',
                                                 style: smallTextStyle(),
                                               ),
                                             ],
@@ -125,9 +117,11 @@ class _SetMenuViewState extends State<SetMenuView> {
                       itemCount: 6, // * No of expansion tiles
                     ),
                     const SizedBox(height: 20),
-                    LargeButton(label: 'Next', onPressed: () {
-                      //* add menu data
-                    })
+                    LargeButton(
+                        label: 'Next',
+                        onPressed: () {
+                          //* add menu data
+                        })
                   ],
                 ),
               ),
