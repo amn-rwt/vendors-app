@@ -5,6 +5,6 @@ class CloudFirestoreServices {
   static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   static CollectionReference vendors = firebaseFirestore.collection('vendors');
   static Future addUser(Vendor vendor) async {
-    vendors.add(vendor.toMap());
+    vendors.doc(vendor.uId).set(vendor.toMap());
   }
 }

@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vendors_app/components/appbar.dart';
-import 'package:vendors_app/components/large_button.dart';
 import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/components/components.dart';
+
 import 'package:vendors_app/constants/value_constants.dart';
+import 'package:vendors_app/features/authentication/register/controller.dart/set_menu_controller.dart';
 import 'package:vendors_app/features/authentication/register/view/add_food_items.dart';
+import 'package:vendors_app/features/home/home_view.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
 class SetMenuView extends StatefulWidget {
@@ -16,6 +21,7 @@ class SetMenuView extends StatefulWidget {
 }
 
 class _SetMenuViewState extends State<SetMenuView> {
+  final controller = Get.put(SetMenuController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,33 +45,58 @@ class _SetMenuViewState extends State<SetMenuView> {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          child: ExpansionTile(
-                            maintainState: true,
-                            title: Text(daysOfWeek[index],
-                                style: mediumTextStyle()),
-                            initiallyExpanded: (index == 0) ? true : false,
-                            children: [
-                              GridView.builder(
-                                itemCount: 1,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  // crossAxisSpacing: 4,
-                                ),
-                                itemBuilder: (context, index) =>
-                                    (index == 1 - 1)
+                        String day = daysOfWeek[index];
+                        return FutureBuilder(
+                          future: FirebaseFirestore.instance
+                              .collection('vendors')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .collection('menu')
+                              .doc(day)
+                              .get(),
+                          builder: (context, snapshot) {
+                            if (snapshot.data == null) {
+                              return const CupertinoActivityIndicator();
+                            }
+                            Map<String, dynamic> data =
+                                (snapshot.data!.data() != null)
+                                    ? snapshot.data!.data()
+                                        as Map<String, dynamic>
+                                    : {};
+
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: ExpansionTile(
+                                maintainState: true,
+                                title: Text(daysOfWeek[index],
+                                    style: mediumTextStyle()),
+                                initiallyExpanded: (index == 0) ? true : false,
+                                children: [
+                                  GridView.builder(
+                                    itemCount: (data['items'] == null ||
+                                            data['items'].isEmpty)
+                                        ? 1
+                                        : data['items'].length + 1,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      // crossAxisSpacing: 4,
+                                    ),
+                                    itemBuilder: (context, index) => (data
+                                                .entries.isEmpty ||
+                                            index == data['items'].length)
                                         ? Column(
                                             children: [
                                               GestureDetector(
                                                 onTap: () => Get.to(
-                                                    () => AddFoodItemsView()),
+                                                    () => AddFoodItemsView(
+                                                          day: day,
+                                                        )),
                                                 child: Container(
                                                   height: 50,
                                                   width: 50,
@@ -74,7 +105,8 @@ class _SetMenuViewState extends State<SetMenuView> {
                                                       color: Colors.white),
                                                 ),
                                               ),
-                                              (true)
+                                              (data.entries.isEmpty ||
+                                                      data['items'].length == 0)
                                                   ? Text(
                                                       'Add items',
                                                       style: smallTextStyle(
@@ -90,11 +122,13 @@ class _SetMenuViewState extends State<SetMenuView> {
                                         : Column(
                                             children: [
                                               Tooltip(
+                                                textAlign: TextAlign.center,
                                                 showDuration: const Duration(
                                                     milliseconds: 400),
                                                 waitDuration: const Duration(
                                                     milliseconds: 100),
-                                                message: 'tooltip item name',
+                                                message: data['items'][index]
+                                                    .toString(),
                                                 child: Container(
                                                   height: 50,
                                                   width: 50,
@@ -102,26 +136,30 @@ class _SetMenuViewState extends State<SetMenuView> {
                                                 ),
                                               ),
                                               Text(
-                                                'name',
+                                                data['items'][index].toString(),
                                                 style: smallTextStyle(),
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ],
                                           ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            );
+                          },
                         );
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
-                      itemCount: 6, // * No of expansion tiles
+                      itemCount: daysOfWeek.length,
                     ),
                     const SizedBox(height: 20),
                     LargeButton(
-                        label: 'Next',
-                        onPressed: () {
-                          //* add menu data
-                        })
+                      label: 'Next',
+                      onPressed: () {
+                        Get.to(() => const HomeView());
+                      },
+                    ),
                   ],
                 ),
               ),

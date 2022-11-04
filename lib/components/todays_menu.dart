@@ -6,7 +6,8 @@ import 'package:vendors_app/styles/text_styles.dart';
 
 class TodaysMenu extends StatefulWidget {
   final int itemCount;
-  const TodaysMenu({super.key, required this.itemCount});
+  final List menuItems;
+  const TodaysMenu({super.key, required this.itemCount, required this.menuItems});
 
   @override
   State<TodaysMenu> createState() => _TodaysMenuState();
@@ -65,7 +66,7 @@ class _TodaysMenuState extends State<TodaysMenu> {
                       children: [
                         Container(
                           height: 50,
-                          width: double.infinity,
+                          width: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(3),
                             color: Colors.black,

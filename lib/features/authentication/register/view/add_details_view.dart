@@ -1,49 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:vendors_app/components/components.dart';
 import 'package:get/get.dart';
-import 'package:vendors_app/components/large_button.dart';
-import 'package:vendors_app/components/textfield.dart';
 import 'package:vendors_app/constants/value_constants.dart';
 import 'package:vendors_app/features/authentication/register/controller.dart/register_controller.dart';
 
-class AddDetailsView extends StatelessWidget {
+class AddDetails extends StatelessWidget {
   final String uid;
-  const AddDetailsView({super.key, required this.uid});
+  final String email;
+  const AddDetails({super.key, required this.uid, required this.email});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterController());
-
     return Scaffold(
+      appBar: const CustomAppbar(label: 'Add Details'),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            CustomTextfield(controller: controller.name, hintText: 'Name'),
+            CustomTextfield(controller: controller.phone, hintText: 'Phone'),
             CustomTextfield(
-              controller: controller.resturantName,
-              hintText: 'ResName',
-            ),
-            const SizedBox(height: 10),
+                controller: controller.resturantName,
+                hintText: 'Resturant Name'),
             CustomTextfield(
-              controller: controller.phone,
-              hintText: 'Phone',
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              controller: controller.upiID,
-              hintText: 'UPI',
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              controller: controller.pricePerTiffin,
-              hintText: 'Price',
-              prefixText: ruppeSymbol,
-            ),
-            const SizedBox(height: 50),
+                controller: controller.pricePerTiffin,
+                hintText: 'Price per tiffin',
+                prefixText: ruppeSymbol),
+            CustomTextfield(controller: controller.upiID, hintText: 'UPI Id'),
+            const Spacer(),
             LargeButton(
               label: 'Next',
-              onPressed: () {}, // * register model and move to next screen
-            )
+              onPressed: () => controller.addDetails(
+                controller.name.text,
+                email,
+                controller.resturantName.text,
+                int.parse(controller.pricePerTiffin.text),
+                controller.phone.text,
+                controller.upiID.text,
+                uid,
+              ),
+            ),
           ],
         ),
       ),

@@ -2,12 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vendors_app/components/appbar.dart';
-import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/components/components.dart';
 import 'package:vendors_app/features/settings/settings_controller.dart';
-import 'package:vendors_app/styles/text_styles.dart';
-
-import '../../components/function_list_tile.dart';
 import '../order_settings/order_settings_view.dart';
 
 class SettingsView extends StatefulWidget {

@@ -7,5 +7,5 @@ List<String> daysOfWeek = [
   'Thursday',
   'Friday',
   'Saturday',
-  'Sunday'
+  'Sunday',
 ];

@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vendors_app/components/large_button.dart';
-import 'package:vendors_app/components/textfield.dart';
+import 'package:vendors_app/components/components.dart';
 import 'package:vendors_app/features/authentication/login/login_view.dart';
 import 'package:vendors_app/features/authentication/register/controller.dart/register_controller.dart';
 import 'package:vendors_app/styles/text_styles.dart';
@@ -55,7 +54,7 @@ class RegisterView extends StatelessWidget {
                       .then((value) =>
                           controller.loader.value = !controller.loader.value),
                 },
-                ),
+              ),
             ),
             const SizedBox(height: 20),
             RichText(

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:vendors_app/features/authentication/register/view/add_details.dart';
+import 'package:vendors_app/features/authentication/register/view/add_details_view.dart';
 import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
 import 'package:vendors_app/model/menu.dart';
 import 'package:vendors_app/model/vendor.dart';

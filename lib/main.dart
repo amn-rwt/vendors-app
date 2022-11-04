@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vendors_app/constants/color_constants.dart';
-import 'package:vendors_app/features/authentication/auth_wrapper.dart';
-import 'package:vendors_app/features/authentication/register/view/add_food_items.dart';
-import 'package:vendors_app/features/authentication/register/view/register_view.dart';
-import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
+import 'package:vendors_app/features/home/home_view.dart';
+import 'package:vendors_app/test/test_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
       ),
-      home: SafeArea(bottom: false, child: RegisterView()),
+      home: SafeArea(bottom: false, child: TestView1()),
       // home: SafeArea(
       //     bottom: false,
       //     child: SetMenuView(

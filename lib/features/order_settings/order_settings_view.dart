@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vendors_app/components/appbar.dart';
+import 'package:vendors_app/components/components.dart';
 
 class OrderSettingsView extends StatelessWidget {
   const OrderSettingsView({super.key});

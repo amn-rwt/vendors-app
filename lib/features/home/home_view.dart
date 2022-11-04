@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vendors_app/components/appbar.dart';
-import 'package:vendors_app/components/order_details_tile.dart';
-import 'package:vendors_app/components/todays_menu.dart';
 import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/styles/text_styles.dart';
+import 'package:vendors_app/components/components.dart';
 
 class HomeView extends StatelessWidget {
   final String? uid;
@@ -20,6 +18,7 @@ class HomeView extends StatelessWidget {
             children: [
               const TodaysMenu(
                 itemCount: 5,
+                menuItems: [],
               ),
               const SizedBox(height: 10),
               Container(
