@@ -26,7 +26,7 @@ class AddDetails extends StatelessWidget {
             CustomTextfield(
                 controller: controller.pricePerTiffin,
                 hintText: 'Price per tiffin',
-                prefixText: ruppeSymbol),
+                prefixText: '$ruppeSymbol '),
             CustomTextfield(controller: controller.upiID, hintText: 'UPI Id'),
             const Spacer(),
             LargeButton(

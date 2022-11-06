@@ -40,18 +40,22 @@ class AddFoodItemsView extends StatelessWidget {
                               onTap: () {
                                 controller.addItems(
                                     controller.foodItems[index].docId);
-                                log(controller.foodItems[index].docId
-                                    .toString());
-                              }, // add Item to specific day doc.
-                              // onTap: () => controller., //add items to selected items list. and model for specific day.
+                              },
                               child: Container(
                                 height: 50,
                                 width: 50,
                                 decoration: BoxDecoration(
+                                  border: (controller.selectedItems.contains(
+                                          controller.foodItems[index].docId))
+                                      ? Border.all(
+                                          width: 2,
+                                          color: Colors.green,
+                                        )
+                                      : const Border(),
                                   color: Colors.black,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Image.network(imageUrl),
+                                // child: Image.network(imageUrl),
                               ),
                             ),
                             Text(name),
@@ -65,8 +69,11 @@ class AddFoodItemsView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: LargeButton(
                 label: 'Add Items',
-                onPressed: () =>
-                    controller.setMenuForDay(day).then((value) => Get.back()),
+                onPressed: () => controller.setMenuForDay(day).then(
+                  (value) {
+                    Get.back();
+                  },
+                ),
               ),
             )
           ],

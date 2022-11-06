@@ -8,8 +8,6 @@ class Menu {
       'day': day,
       'items': items,
     };
-
-    
   }
 }
 

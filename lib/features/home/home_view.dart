@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/features/home/home_controller.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 import 'package:vendors_app/components/components.dart';
 
 class HomeView extends StatelessWidget {
   final String? uid;
-  const HomeView({super.key, this.uid});
+  HomeView({super.key, this.uid});
+
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return (FirebaseAuth.instance.currentUser == null)
         ? const LoginView()
-        : const HomeView();
+        : HomeView();
 
   }
 }
