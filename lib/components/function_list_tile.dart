@@ -21,7 +21,7 @@ class CustomListTile extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: ListTile(
-          title: Text(label, style: listTileTextStyle()),
+          title: Text(label, style: mediumTextStyle()),
           trailing: (trailing)
               ? const Icon(
                   Icons.arrow_forward_ios,

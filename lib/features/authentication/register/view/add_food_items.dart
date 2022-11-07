@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/components/components.dart';
+import 'package:vendors_app/features/home/home_view.dart';
 import '../controller.dart/add_food_items_controller.dart';
 
 class AddFoodItemsView extends StatelessWidget {
@@ -36,26 +35,28 @@ class AddFoodItemsView extends StatelessWidget {
                             controller.foodItems[index].imageUrl;
                         return Column(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                controller.addItems(
-                                    controller.foodItems[index].docId);
-                              },
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  border: (controller.selectedItems.contains(
-                                          controller.foodItems[index].docId))
-                                      ? Border.all(
-                                          width: 2,
-                                          color: Colors.green,
-                                        )
-                                      : const Border(),
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(5),
+                            Obx(
+                              () => GestureDetector(
+                                onTap: () {
+                                  controller.addItems(
+                                      controller.foodItems[index].docId);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    border: (controller.selectedItems!.contains(
+                                            controller.foodItems[index].docId))
+                                        ? Border.all(
+                                            width: 4,
+                                            color: Colors.green,
+                                          )
+                                        : const Border(),
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  // child: Image.network(imageUrl),
                                 ),
-                                // child: Image.network(imageUrl),
                               ),
                             ),
                             Text(name),
@@ -68,13 +69,17 @@ class AddFoodItemsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: LargeButton(
-                label: 'Add Items',
-                onPressed: () => controller.setMenuForDay(day).then(
-                  (value) {
-                    Get.back();
-                  },
-                ),
-              ),
+                  label: 'Add Items',
+                  onPressed: () {
+                    controller.setMenuForDay(day).then(
+                      (value) {
+                        Get.off(HomeView());
+                        controller.homeController.getTodaysMenu();
+                        controller.homeController.isMenuLoaded.value =
+                            !controller.homeController.isMenuLoaded.value;
+                      },
+                    );
+                  }),
             )
           ],
         ));

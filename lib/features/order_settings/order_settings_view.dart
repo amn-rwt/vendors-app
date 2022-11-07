@@ -7,7 +7,10 @@ class OrderSettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(label: 'Order Settings'),
+      appBar: const CustomAppbar(
+        label: 'Order Settings',
+        leading: true,
+      ),
       body: Column(),
     );
   }

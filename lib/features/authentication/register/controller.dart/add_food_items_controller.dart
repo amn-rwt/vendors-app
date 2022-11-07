@@ -5,20 +5,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/model/menu.dart';
 
+import '../../../home/home_controller.dart';
+
 class AddFoodItemsController extends GetxController {
+  final homeController = Get.put(HomeController());
+
   RxBool isLoading = true.obs;
   List<FoodItem> foodItems = [];
 
-  List<String> selectedItems = [];
+  RxList? selectedItems;
 
   void addItems(String item) {
-    selectedItems.contains(item)
-        ? selectedItems.remove(item)
-        : selectedItems.add(item);
+    selectedItems!.contains(item)
+        ? selectedItems!.remove(item)
+        : selectedItems!.add(item);
   }
 
   @override
   onInit() {
+    selectedItems = homeController.menuData!.items.obs;
     getFoodItems();
     super.onInit();
   }
@@ -49,6 +54,6 @@ class AddFoodItemsController extends GetxController {
         .doc(user!.uid)
         .collection('menu')
         .doc(day)
-        .set(Menu(day: day, items: selectedItems).toMap());
+        .set(Menu(day: day, items: selectedItems!).toMap());
   }
 }

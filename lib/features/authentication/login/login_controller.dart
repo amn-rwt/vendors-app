@@ -13,13 +13,20 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+  RxBool isLoading = false.obs;
+
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
   Future loginWithEmailAndPassword() async {
+    isLoading.value = !isLoading.value;
     final user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email.text, password: password.text);
-    Get.to(HomeView(uid: user.user!.uid));
+        .signInWithEmailAndPassword(email: email.text, password: password.text)
+        .then((value) {
+      isLoading.value = !isLoading.value;
+      Get.offAll(() => HomeView(uid: value.user!.uid));
+    });
+    // isLoading.value = !isLoading.value;
   }
 
   static void logout() {

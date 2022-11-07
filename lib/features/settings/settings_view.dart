@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/components/components.dart';
+import 'package:vendors_app/features/account_settings/account_settings_view.dart';
 import 'package:vendors_app/features/settings/settings_controller.dart';
 import '../order_settings/order_settings_view.dart';
 
@@ -27,9 +28,6 @@ class _SettingsViewState extends State<SettingsView> {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: Column(
           children: [
-            const CustomListTile(
-              label: 'About',
-            ),
             CustomListTile(
               label: 'Order Settings',
               onTap: () => Get.to(
@@ -37,9 +35,17 @@ class _SettingsViewState extends State<SettingsView> {
               ),
             ),
             CustomListTile(
+              label: 'Account Settings',
+              onTap: () => Get.to(() => const AccountSettingsView()),
+            ),
+            const CustomListTile(
+              label: 'About',
+            ),
+            CustomListTile(
               label: 'Logout',
               onTap: controller.logout,
-            )
+              trailing: false,
+            ),
           ],
         ),
       ),

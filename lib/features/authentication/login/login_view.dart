@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,9 +31,12 @@ class LoginView extends StatelessWidget {
               isObsecure: true,
             ),
             const SizedBox(height: 30),
-            LargeButton(
-              label: 'Login',
-              onPressed: () => controller.loginWithEmailAndPassword(),
+            Obx(
+              () => LargeButton(
+                isLoading: controller.isLoading.value,
+                label: 'Login',
+                onPressed: () => controller.loginWithEmailAndPassword(),
+              ),
             ),
             const SizedBox(height: 20),
             RichText(

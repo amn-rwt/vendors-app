@@ -1,12 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/features/authentication/register/view/add_details_view.dart';
 import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
-import 'package:vendors_app/model/menu.dart';
 import 'package:vendors_app/model/vendor.dart';
 import 'package:vendors_app/services/cloud_firestore_services.dart';
 import 'package:vendors_app/services/firebase_auth_services.dart';

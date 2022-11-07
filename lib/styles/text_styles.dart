@@ -42,7 +42,6 @@ TextStyle textfieldTextStyle() {
 
 TextStyle listTileTextStyle() {
   return TextStyle(
-    
     fontSize: 16,
     color: Colors.black.withOpacity(0.87),
   );

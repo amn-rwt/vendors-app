@@ -26,11 +26,11 @@ class FirebaseAuthServices {
   }
 
   static Future login(String email, String password) async {
+    String uid = '';
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
-        .then(
-          (user) => log(user.user!.uid),
-        );
+        .then((value) => uid = value.user!.uid);
+    return uid;
   }
 
   static Future signOut() async {

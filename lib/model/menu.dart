@@ -1,6 +1,6 @@
 class Menu {
   final String day;
-  final List<String> items;
+  final List items;
   Menu({required this.day, required this.items});
 
   Map<String, dynamic> toMap() {
@@ -9,6 +9,10 @@ class Menu {
       'items': items,
     };
   }
+
+  Menu.fromSnapshot(Map<String, dynamic> snapshot)
+      : day = snapshot['day'],
+        items = snapshot['items'].toList();
 }
 
 class FoodItem {
