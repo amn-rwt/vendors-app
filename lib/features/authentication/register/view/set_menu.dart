@@ -102,9 +102,7 @@ class _SetMenuViewState extends State<SetMenuView> {
                                             children: [
                                               GestureDetector(
                                                 onTap: () => Get.to(
-                                                    () => AddFoodItemsView(
-                                                          day: day,
-                                                        )),
+                                                    () => AddFoodItemsView()),
                                                 child: Container(
                                                   height: 50,
                                                   width: 50,

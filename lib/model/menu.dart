@@ -25,6 +25,7 @@ class FoodItem {
     return {
       'name': name,
       'imageUrl': imageUrl,
+      'docId': docId,
     };
   }
 }

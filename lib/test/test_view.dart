@@ -1,23 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ntp/ntp.dart';
-import 'package:vendors_app/test/test_controller.dart';
+import 'dart:developer';
 
-import '../constants/value_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:vendors_app/components/components.dart';
 
 class TestView1 extends StatelessWidget {
-  TestView1({super.key});
-
-  final controller = Get.put(TestController());
+  const TestView1({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        // child: Text('${controller.now!.weekday}'),
-        child: Text(daysOfWeek[controller.now!.weekday - 2]),
-      ),
-    );
+    Stream<DocumentSnapshot> stream = FirebaseFirestore.instance
+        .collection('vendors')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('menu')
+        .doc('Monday')
+        .snapshots();
+
+    log(stream.toString());
+    return Scaffold(body: TodaysMenu(stream: stream));
   }
 }

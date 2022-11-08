@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vendors_app/components/components.dart';
 import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/test/test_view.dart';
 
 import 'features/authentication/auth_wrapper.dart';
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
       ),
-      home: const SafeArea(bottom: false, child: AuthWrapper()),
+      home: SafeArea(bottom: false, child: AuthWrapper()),
       // home: SafeArea(bottom: false, child: TestView1()),
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,

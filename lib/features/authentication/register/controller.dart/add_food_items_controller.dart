@@ -5,27 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/model/menu.dart';
 
-import '../../../home/home_controller.dart';
-
 class AddFoodItemsController extends GetxController {
-  final homeController = Get.put(HomeController());
+  Stream<QuerySnapshot> foodItems =
+      FirebaseFirestore.instance.collection('foodItems').snapshots();
 
-  RxBool isLoading = true.obs;
-  List<FoodItem> foodItems = [];
-
-  RxList? selectedItems;
+  RxList selectedItems = [].obs;
 
   void addItems(String item) {
-    selectedItems!.contains(item)
-        ? selectedItems!.remove(item)
-        : selectedItems!.add(item);
-  }
-
-  @override
-  onInit() {
-    selectedItems = homeController.menuData!.items.obs;
-    getFoodItems();
-    super.onInit();
+    selectedItems.value.contains(item)
+        ? selectedItems.remove(item)
+        : selectedItems.add(item);
   }
 
   @override
@@ -34,17 +23,17 @@ class AddFoodItemsController extends GetxController {
     super.onClose();
   }
 
-  Future getFoodItems() async {
-    QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('foodItems').get();
+  // Future getFoodItems() async {
+  //   QuerySnapshot snapshot =
+  //       await FirebaseFirestore.instance.collection('foodItems').get();
 
-    foodItems = snapshot.docs
-        .map((doc) => FoodItem(
-            imageUrl: doc['imageUrl'], name: doc['name'], docId: doc.id))
-        .toList();
+  //   foodItems = snapshot.docs
+  //       .map((doc) => FoodItem(
+  //           imageUrl: doc['imageUrl'], name: doc['name'], docId: doc.id))
+  //       .toList();
 
-    isLoading.value = !isLoading.value;
-  }
+  //   isLoading.value = !isLoading.value;
+  // }
 
   Future setMenuForDay(String day) async {
     log(selectedItems.toString());
@@ -54,6 +43,6 @@ class AddFoodItemsController extends GetxController {
         .doc(user!.uid)
         .collection('menu')
         .doc(day)
-        .set(Menu(day: day, items: selectedItems!).toMap());
+        .set(Menu(day: day, items: selectedItems).toMap());
   }
 }
