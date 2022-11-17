@@ -12,7 +12,7 @@ class HomeController extends GetxController {
       .collection('vendors')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('menu')
-      .doc('Tuesday')
+      .doc('Wednesday')
       .snapshots();
 
   void updateMenu() {

@@ -36,6 +36,7 @@ class RegisterView extends StatelessWidget {
               controller: controller.email,
               hintText: 'Email',
             ),
+
             CustomTextfield(
               controller: controller.password,
               hintText: 'Password',

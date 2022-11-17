@@ -35,7 +35,8 @@ class TodaysMenu extends StatelessWidget {
             child: StreamBuilder(
                 stream: stream,
                 builder: (context, snapshot) {
-                  final Menu menu = Menu.fromSnapshot(snapshot.data.data());
+                  // final Menu menu = Menu.fromSnapshot(snapshot.data);
+                  log(snapshot.hasData.toString());
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CupertinoActivityIndicator();
                   } else if (snapshot.data == null) {
@@ -65,8 +66,8 @@ class TodaysMenu extends StatelessWidget {
                                       color: primaryColor,
                                     ),
                                     child: IconButton(
-                                      onPressed: () => Get.to(() =>
-                                          AddFoodItemsView()),
+                                      onPressed: () =>
+                                          Get.to(() => AddFoodItemsView()),
                                       icon: const Icon(
                                         Icons.add,
                                         color: Colors.white,
@@ -90,7 +91,7 @@ class TodaysMenu extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '${menu.items[index]}',
+                                    snapshot.data['items'][index],
                                     style: mediumTextStyle(),
                                     overflow: TextOverflow.ellipsis,
                                   )
