@@ -1,0 +1,1 @@
+In user app update the setOrder() to set the document with vendorId and customerId to fetch orderDetails from both ends.
