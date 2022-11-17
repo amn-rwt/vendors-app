@@ -15,7 +15,14 @@ class HomeController extends GetxController {
       .doc('Wednesday')
       .snapshots();
 
+  final Stream orders = FirebaseFirestore.instance
+      .collection('orders')
+      .where('vendorId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .snapshots();
+
   void updateMenu() {
-    Get.to(AddFoodItemsView());
+    Get.to(AddFoodItemsView(
+      day: 'Monday',
+    ));
   }
 }

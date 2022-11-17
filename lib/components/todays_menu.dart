@@ -36,12 +36,10 @@ class TodaysMenu extends StatelessWidget {
                 stream: stream,
                 builder: (context, snapshot) {
                   // final Menu menu = Menu.fromSnapshot(snapshot.data);
-                  log(snapshot.hasData.toString());
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CupertinoActivityIndicator();
+                    return const CupertinoActivityIndicator();
                   } else if (snapshot.data == null) {
-                    log('here');
-                    return Text('empty');
+                    return const Text('empty');
                   }
                   return GridView.builder(
                       shrinkWrap: true,
@@ -67,7 +65,9 @@ class TodaysMenu extends StatelessWidget {
                                     ),
                                     child: IconButton(
                                       onPressed: () =>
-                                          Get.to(() => AddFoodItemsView()),
+                                          Get.to(() => AddFoodItemsView(
+                                                day: 'Monday',
+                                              )),
                                       icon: const Icon(
                                         Icons.add,
                                         color: Colors.white,

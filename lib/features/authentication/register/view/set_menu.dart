@@ -54,13 +54,13 @@ class _SetMenuViewState extends State<SetMenuView> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         String day = daysOfWeek[index];
-                        return FutureBuilder(
-                          future: FirebaseFirestore.instance
+                        return StreamBuilder(
+                          stream: FirebaseFirestore.instance
                               .collection('vendors')
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .collection('menu')
                               .doc(day)
-                              .get(),
+                              .snapshots(),
                           builder: (context, snapshot) {
                             if (snapshot.data == null) {
                               return const CupertinoActivityIndicator();
@@ -102,7 +102,7 @@ class _SetMenuViewState extends State<SetMenuView> {
                                             children: [
                                               GestureDetector(
                                                 onTap: () => Get.to(
-                                                    () => AddFoodItemsView()),
+                                                    () => AddFoodItemsView(day: daysOfWeek[index],)),
                                                 child: Container(
                                                   height: 50,
                                                   width: 50,

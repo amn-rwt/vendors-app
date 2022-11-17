@@ -33,59 +33,65 @@ class HomeView extends StatelessWidget {
                   color: Colors.white,
                 ),
                 // height: 1000,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Total Order',
-                          textAlign: TextAlign.end,
-                          style: largeHeadingTextStyle(),
-                        ),
-                        const Text(
-                          '15',
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: primaryColor,
-                            fontWeight: FontWeight.bold,
+                child: StreamBuilder(
+                    stream: controller.orders,
+                    builder: (context, snapshot) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Total Order',
+                                textAlign: TextAlign.end,
+                                style: largeHeadingTextStyle(),
+                              ),
+                              Text(
+                                snapshot.data.docs.length.toString(),
+                                textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    const Divider(),
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Icon(
-                          Icons.sort,
-                          color: Colors.blue,
-                          size: 16,
-                        ),
-                        Text(
-                          'Sort',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 12,
-                              decoration: TextDecoration.underline),
-                        ),
-                      ],
-                    ),
-                    Flexible(
-                      child: ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: 12,
-                          separatorBuilder: (context, index) => const Divider(),
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) =>
-                              const OrderDetailTile()),
-                    )
-                  ],
-                ),
+                          const Divider(),
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Icon(
+                                Icons.sort,
+                                color: Colors.blue,
+                                size: 16,
+                              ),
+                              Text(
+                                'Sort',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 12,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ],
+                          ),
+                          Flexible(
+                            child: ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.docs.length,
+                              separatorBuilder: (context, index) =>
+                                  const Divider(),
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) =>
+                                  const OrderDetailTile(),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
               ),
             ],
           ),

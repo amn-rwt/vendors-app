@@ -5,7 +5,8 @@ import '../../../../model/menu.dart';
 import '../controller.dart/add_food_items_controller.dart';
 
 class AddFoodItemsView extends StatelessWidget {
-  AddFoodItemsView({super.key});
+  final String day;
+  AddFoodItemsView({super.key, required this.day});
 
   final controller = Get.put(AddFoodItemsController());
 
@@ -73,7 +74,7 @@ class AddFoodItemsView extends StatelessWidget {
                 label: 'Add Items',
                 // onPressed: () {},
                 onPressed: () {
-                  controller.setMenuForDay('Wednesday').then(
+                  controller.setMenuForDay(day).then(
                     (value) {
                       Get.back();
                     },
