@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/components/components.dart';
@@ -12,6 +14,7 @@ class AddFoodItemsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(day);
     return Scaffold(
         appBar: const CustomAppbar(label: 'Add Items'),
         body: Column(

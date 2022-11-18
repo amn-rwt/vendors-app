@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/components/compact_button.dart';
 import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/services/time_provider.dart';
 import 'package:vendors_app/styles/button_theme_and_styles.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
@@ -66,7 +67,8 @@ class TodaysMenu extends StatelessWidget {
                                     child: IconButton(
                                       onPressed: () =>
                                           Get.to(() => AddFoodItemsView(
-                                                day: 'Monday',
+                                                day: CurrentTime.weekday(
+                                                    context)!,
                                               )),
                                       icon: const Icon(
                                         Icons.add,

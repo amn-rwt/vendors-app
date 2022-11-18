@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/constants/color_constants.dart';
@@ -7,12 +9,11 @@ import 'package:vendors_app/components/components.dart';
 
 class HomeView extends StatelessWidget {
   final String? uid;
-  HomeView({super.key, this.uid});
-
-  final controller = Get.put(HomeController());
+  const HomeView({super.key, this.uid});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController(context: context));
     return Scaffold(
       appBar: const CustomAppbar(label: 'Home', trailing: true),
       body: SingleChildScrollView(
@@ -34,64 +35,92 @@ class HomeView extends StatelessWidget {
                 ),
                 // height: 1000,
                 child: StreamBuilder(
-                    stream: controller.orders,
-                    builder: (context, snapshot) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Total Order',
-                                textAlign: TextAlign.end,
-                                style: largeHeadingTextStyle(),
-                              ),
-                              Text(
-                                snapshot.data.docs.length.toString(),
-                                textAlign: TextAlign.end,
-                                style: const TextStyle(
-                                  fontSize: 30,
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
-                          ),
-                          const Divider(),
-                          const SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Icon(
-                                Icons.sort,
-                                color: Colors.blue,
-                                size: 16,
-                              ),
-                              Text(
-                                'Sort',
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 12,
-                                    decoration: TextDecoration.underline),
-                              ),
-                            ],
-                          ),
-                          Flexible(
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data.docs.length,
-                              separatorBuilder: (context, index) =>
-                                  const Divider(),
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) =>
-                                  const OrderDetailTile(),
+                  stream: controller.orders,
+                  builder: (context, snapshot) {
+                    if (snapshot.data == null) {
+                      log('data is null');
+                    }
+                    if (snapshot.data != null) {
+                      log('data is not null');
+                    }
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Total Orders',
+                              textAlign: TextAlign.end,
+                              style: largeHeadingTextStyle(),
                             ),
+                            Text(
+                              (snapshot.data == null)
+                                  ? '0'
+                                  : snapshot.data!.docs!.length.toString(),
+                              style: const TextStyle(
+                                fontSize: 30,
+                                color: primaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(),
+                        const SizedBox(height: 5),
+                        (snapshot.data == null ||
+                                snapshot.data!.docs!.length == 0)
+                            ? const SizedBox(
+                                child: Text('No orders recived yet.'),
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: const [
+                                  Icon(
+                                    Icons.sort,
+                                    color: Colors.blue,
+                                    size: 16,
+                                  ),
+                                  Text(
+                                    'Sort',
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 12,
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ],
+                              ),
+                        Flexible(
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data == null
+                                ? 0
+                                : snapshot.data.docs.length,
+                            separatorBuilder: (context, index) =>
+                                const Divider(),
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CupertinoActivityIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text('Something went wrong');
+                              } else if (snapshot.hasData) {
+                                if (snapshot.data != null) {
+                                  const OrderDetailTile();
+                                } else {
+                                  const Text('No orders recived yet.');
+                                }
+                              }
+                              return const Text('Something went wrong');
+                            },
                           ),
-                        ],
-                      );
-                    }),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ],
           ),

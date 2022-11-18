@@ -36,7 +36,7 @@ class AddFoodItemsController extends GetxController {
   // }
 
   Future setMenuForDay(String day) async {
-    log(selectedItems.toString());
+    log(day);
     final user = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance
         .collection('vendors')

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vendors_app/components/components.dart';
 import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/features/authentication/register/view/set_menu.dart';
+import 'package:vendors_app/services/time_provider.dart';
 import 'package:vendors_app/test/test_view.dart';
 
 import 'features/authentication/auth_wrapper.dart';
@@ -28,9 +29,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
       ),
-      home: SafeArea(
-          bottom: false,
-          child: SetMenuView(uid: FirebaseAuth.instance.currentUser!.uid)),
+      builder: (context, child) =>
+          CurrentTime(child: child ?? const SizedBox()),
+      home: const AuthWrapper(),
       // home: SafeArea(bottom: false, child: TestView1()),
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,

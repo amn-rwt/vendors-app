@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/components/components.dart';
-
 import 'package:vendors_app/constants/value_constants.dart';
 import 'package:vendors_app/features/authentication/register/controller.dart/set_menu_controller.dart';
 import 'package:vendors_app/features/authentication/register/view/add_food_items.dart';
@@ -25,7 +23,6 @@ class SetMenuView extends StatefulWidget {
 class _SetMenuViewState extends State<SetMenuView> {
   @override
   void initState() {
-    log('here');
     super.initState();
   }
 
@@ -33,7 +30,7 @@ class _SetMenuViewState extends State<SetMenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(label: 'Set', leading: true),
+      appBar: const CustomAppbar(label: 'Set Menu', leading: true),
       backgroundColor: scaffoldBackgroundColor,
       body: LayoutBuilder(
         builder: (context, constrains) {
@@ -52,8 +49,8 @@ class _SetMenuViewState extends State<SetMenuView> {
                     ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        String day = daysOfWeek[index];
+                      itemBuilder: (context, rootindex) {
+                        String day = daysOfWeek[rootindex];
                         return StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('vendors')
@@ -78,9 +75,10 @@ class _SetMenuViewState extends State<SetMenuView> {
                               ),
                               child: ExpansionTile(
                                 maintainState: true,
-                                title: Text(daysOfWeek[index],
+                                title: Text(daysOfWeek[rootindex],
                                     style: mediumTextStyle()),
-                                initiallyExpanded: (index == 0) ? true : false,
+                                initiallyExpanded:
+                                    (rootindex == 0) ? true : false,
                                 children: [
                                   GridView.builder(
                                     itemCount: (data['items'] == null ||
@@ -101,8 +99,12 @@ class _SetMenuViewState extends State<SetMenuView> {
                                         ? Column(
                                             children: [
                                               GestureDetector(
-                                                onTap: () => Get.to(
-                                                    () => AddFoodItemsView(day: daysOfWeek[index],)),
+                                                onTap: () {
+                                                  Get.to(() => AddFoodItemsView(
+                                                        day: daysOfWeek[
+                                                            rootindex],
+                                                      ));
+                                                },
                                                 child: Container(
                                                   height: 50,
                                                   width: 50,
