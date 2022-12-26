@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vendors_app/constants/color_constants.dart';
 
-TextStyle largeHeadingTextStyle([Color? color = Colors.white]) {
+TextStyle largeHeadingTextStyle([Color? color = Colors.black87]) {
   return TextStyle(
     color: color,
     fontSize: 18,
@@ -9,7 +8,7 @@ TextStyle largeHeadingTextStyle([Color? color = Colors.white]) {
   );
 }
 
-TextStyle mediumHeadingTextStyle([Color? color = Colors.white]) {
+TextStyle mediumHeadingTextStyle([Color? color = Colors.black87]) {
   return TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
@@ -17,7 +16,7 @@ TextStyle mediumHeadingTextStyle([Color? color = Colors.white]) {
   );
 }
 
-TextStyle mediumTextStyle([Color? color = Colors.white]) {
+TextStyle mediumTextStyle([Color? color = Colors.black54]) {
   return TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
@@ -25,7 +24,7 @@ TextStyle mediumTextStyle([Color? color = Colors.white]) {
   );
 }
 
-TextStyle smallTextStyle({Color? color = Colors.white70, bool italic = false}) {
+TextStyle smallTextStyle({Color? color = Colors.black87, bool italic = false}) {
   return TextStyle(
     fontStyle: (italic) ? FontStyle.italic : null,
     fontSize: 12,
@@ -37,13 +36,13 @@ TextStyle smallTextStyle({Color? color = Colors.white70, bool italic = false}) {
 TextStyle textfieldTextStyle() {
   return TextStyle(
     fontSize: 14,
-    color: Colors.white.withOpacity(.68),
+    color: Colors.black.withOpacity(.68),
   );
 }
 
 TextStyle listTileTextStyle() {
   return TextStyle(
     fontSize: 16,
-    color: Colors.white.withOpacity(0.87),
+    color: Colors.black.withOpacity(0.87),
   );
 }

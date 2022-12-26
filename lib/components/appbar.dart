@@ -35,7 +35,7 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
               child: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.white70,
+                  color: Colors.black87,
                   size: 20,
                 ),
                 onPressed: () => Navigator.pop(context),
@@ -57,7 +57,7 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
                   // onPressed: () => log('here'),
                   icon: const Icon(
                     Icons.settings,
-                    color: Colors.white70,
+                    color: Colors.black87,
                   ),
                 ))
             : const SizedBox(),

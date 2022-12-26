@@ -9,7 +9,6 @@ class OrderSettingsController extends GetxController {
   TimeOfDay? timeOfDay = const TimeOfDay(hour: 12, minute: 00);
 
   void showTimePickerSheet(BuildContext context) async {
-    log('here');
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: timeOfDay!,
