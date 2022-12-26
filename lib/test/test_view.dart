@@ -18,6 +18,6 @@ class TestView1 extends StatelessWidget {
         .snapshots();
 
     log(stream.toString());
-    return Scaffold(body: TodaysMenu(stream: stream));
+    return Scaffold(body: Container());
   }
 }

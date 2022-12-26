@@ -15,52 +15,58 @@ class LoginView extends StatelessWidget {
     final controller = Get.put(LoginController());
     return Scaffold(
       backgroundColor: scaffoldBackgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Spacer(),
-            CustomTextfield(
-              controller: controller.email,
-              hintText: 'Email',
-              textInputType: TextInputType.emailAddress,
-            ),
-            CustomTextfield(
-              controller: controller.password,
-              hintText: 'Password',
-              isObsecure: true,
-            ),
-            const SizedBox(height: 30),
-            Obx(
-              () => LargeButton(
-                isLoading: controller.isLoading.value,
-                label: 'Login',
-                onPressed: () => controller.loginWithEmailAndPassword(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 40),
+          child: Column(
+            children: [
+              // SizedBox(
+              //   height: 150,
+              //   child: Image.asset('lib/assets/logo.png'),
+              // ),
+              const Spacer(),
+              CustomTextfield(
+                controller: controller.email,
+                hintText: 'Email',
+                textInputType: TextInputType.emailAddress,
               ),
-            ),
-            const SizedBox(height: 20),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Don\'t have a account?  ',
-                    style: smallTextStyle(),
-                  ),
-                  TextSpan(
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => Get.to(RegisterView()),
-                    text: 'Register',
-                    style: const TextStyle(
-                      color: Colors.blue,
-                      fontSize: 12,
-                      decoration: TextDecoration.underline,
+              CustomTextfield(
+                controller: controller.password,
+                hintText: 'Password',
+                isObsecure: true,
+              ),
+              const SizedBox(height: 30),
+              Obx(
+                () => LargeButton(
+                  isLoading: controller.isLoading.value,
+                  label: 'LOGIN',
+                  onPressed: () => controller.loginWithEmailAndPassword(),
+                ),
+              ),
+              const SizedBox(height: 20),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Don\'t have a account?  ',
+                      style: smallTextStyle(),
                     ),
-                  ),
-                ],
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => Get.offAll(RegisterView()),
+                      text: 'Register',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontSize: 12,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 40),
-          ],
+              // const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.nunitoTextTheme(),
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: scaffoldBackgroundColor,
+        scaffoldBackgroundColor: scaffoldBackgroundColor, // * color
       ),
       builder: (context, child) =>
           CurrentTime(child: child ?? const SizedBox()),

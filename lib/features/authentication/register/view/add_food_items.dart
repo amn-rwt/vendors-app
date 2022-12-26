@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vendors_app/components/components.dart';
+import 'package:vendors_app/constants/color_constants.dart';
+import 'package:vendors_app/styles/text_styles.dart';
 import '../../../../model/menu.dart';
 import '../controller.dart/add_food_items_controller.dart';
 
@@ -54,17 +56,20 @@ class AddFoodItemsView extends StatelessWidget {
                                           .contains(foodItems[index].docId))
                                       ? Border.all(
                                           width: 4,
-                                          color: Colors.green,
+                                          color: primaryColor,
                                         )
                                       : const Border(),
-                                  color: Colors.black,
+                                  color: containerBackgroundColor,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 // child: Image.network(imageUrl),
                               ),
                             ),
                           ),
-                          Text(foodItems[index].name),
+                          Text(
+                            foodItems[index].name,
+                            style: smallTextStyle(color: Colors.white60),
+                          ),
                         ],
                       );
                     },

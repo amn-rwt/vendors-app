@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,7 +30,6 @@ class _SetMenuViewState extends State<SetMenuView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppbar(label: 'Set Menu', leading: true),
-      backgroundColor: scaffoldBackgroundColor,
       body: LayoutBuilder(
         builder: (context, constrains) {
           return SingleChildScrollView(
@@ -71,12 +69,15 @@ class _SetMenuViewState extends State<SetMenuView> {
                             return Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
+                                color: containerBackgroundColor,
                               ),
                               child: ExpansionTile(
+                                iconColor: primaryColor,
                                 maintainState: true,
-                                title: Text(daysOfWeek[rootindex],
-                                    style: mediumTextStyle()),
+                                title: Text(
+                                  daysOfWeek[rootindex],
+                                  style: mediumTextStyle(),
+                                ),
                                 initiallyExpanded:
                                     (rootindex == 0) ? true : false,
                                 children: [
@@ -118,12 +119,12 @@ class _SetMenuViewState extends State<SetMenuView> {
                                                   ? Text(
                                                       'Add items',
                                                       style: smallTextStyle(
-                                                          Colors.blue),
+                                                          color: Colors.blue),
                                                     )
                                                   : Text(
                                                       'Add more',
                                                       style: smallTextStyle(
-                                                          Colors.blue),
+                                                          color: Colors.blue),
                                                     ),
                                             ],
                                           )
@@ -165,7 +166,7 @@ class _SetMenuViewState extends State<SetMenuView> {
                     LargeButton(
                       label: 'Next',
                       onPressed: () {
-                        Get.to(() => HomeView());
+                        Get.to(() => const HomeView());
                       },
                     ),
                   ],

@@ -30,12 +30,12 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
               height: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+                color: containerBackgroundColor,
               ),
               child: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.black,
+                  color: Colors.white70,
                   size: 20,
                 ),
                 onPressed: () => Navigator.pop(context),
@@ -50,14 +50,14 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+                  color: containerBackgroundColor,
                 ),
                 child: IconButton(
                   onPressed: () => Get.to(() => const SettingsView()),
                   // onPressed: () => log('here'),
                   icon: const Icon(
                     Icons.settings,
-                    color: Colors.black87,
+                    color: Colors.white70,
                   ),
                 ))
             : const SizedBox(),
@@ -70,5 +70,5 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(52);
+  Size get preferredSize => const Size.fromHeight(60);
 }

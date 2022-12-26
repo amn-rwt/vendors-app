@@ -20,12 +20,14 @@ class LoginController extends GetxController {
 
   Future loginWithEmailAndPassword() async {
     isLoading.value = !isLoading.value;
-    final user = await FirebaseAuth.instance
+    final authResult = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email.text, password: password.text)
         .then((value) {
+      log(value.toString());
       isLoading.value = !isLoading.value;
       Get.offAll(() => HomeView(uid: value.user!.uid));
     });
+    // if(authResult == )
     // isLoading.value = !isLoading.value;
   }
 

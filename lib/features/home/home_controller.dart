@@ -18,6 +18,8 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  final name = 'username';
+
   late String day = daysOfWeek[CurrentTime.of(context)!.weekday - 1];
 
   late Stream<DocumentSnapshot> todaysMenuStream = FirebaseFirestore.instance

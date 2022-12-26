@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vendors_app/constants/color_constants.dart';
 import 'package:vendors_app/styles/text_styles.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -14,17 +15,19 @@ class CustomListTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       width: double.infinity,
+      height: 52,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: containerBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Align(
         alignment: Alignment.center,
         child: ListTile(
-          title: Text(label, style: mediumTextStyle()),
+          title: Text(label, style: mediumTextStyle(Colors.white60)),
           trailing: (trailing)
               ? const Icon(
                   Icons.arrow_forward_ios,
+                  color: Colors.white30,
                   size: 16,
                 )
               : const SizedBox(),

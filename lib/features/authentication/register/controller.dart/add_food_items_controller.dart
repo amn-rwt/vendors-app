@@ -43,6 +43,9 @@ class AddFoodItemsController extends GetxController {
         .doc(user!.uid)
         .collection('menu')
         .doc(day)
-        .set(Menu(day: day, items: selectedItems).toMap());
+        .set(
+          Menu(day: day, items: selectedItems).toMap(),
+          SetOptions(merge: true),
+        );
   }
 }
